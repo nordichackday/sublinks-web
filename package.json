@@ -1,9 +1,9 @@
 {
   "name": "sublinks-web",
   "version": "0.0.1",
-  "description": "Give links from sub texts link",
+  "description": "Display links based on subtexts",
   "dependencies": {
-    "express": "^4.12.4"
+    "express": "4.12.4"
   },
   "engines": {
     "node": "0.12.x"
