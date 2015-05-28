@@ -20,7 +20,7 @@ app.get('/', function (req, response) {
     request.get("http://www.svt.se/play4api/video/" + req.query.svtplayid).end(function(err, video) {
         if (video.ok) {
             request.get("http://sublinks-filter.heroku.com/?sublink_url=" + video.body.subtitles[0].url).end(function(err, subtext) {
-                response.render('index');
+                response.render('index', {svtvideoid: parseInt(req.query.svtplayid), sublinks: subtext.body});
             });
         } else {
             console.log(video.text);
