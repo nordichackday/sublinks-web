@@ -94,15 +94,18 @@
 	'use strict'
 	var React = __webpack_require__(1)
 
+	var videoid = decodeURIComponent(window.location.search.substring(1).split("&")[0].split("=")[1]);
+
 	module.exports = React.createClass({
 	    displayName: 'VideoPlayer',
+
 	    render: function() {
 	        return (
 	        React.createElement("div", null, 
 
 
 	    React.createElement("div", {dangerouslySetInnerHTML: 
-	      {__html: '<iframe width="100%" height="700" src="http://www.svtplay.se/video/2961624/uppdrag-granskning/uppdrag-granskning-avsnitt-18?type=embed" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'}
+	      {__html: '<iframe width="100%" height="700" src="http://www.svtplay.se/video/' + videoid + '?type=embed" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'}
 	      }
 	       )
 
@@ -127,7 +130,16 @@
 	var LinkObject = __webpack_require__(5)
 
 	var linknode;
-	var response = [{"time":8,"word":"Gereon Kåver"},{"time":488,"word":"Håkan Juholt"},{"time":488,"word":"Håkan Juholt"},{"time":793,"word":"Fredrik Reinfeldt"},{"time":793,"word":"Jan Björklund"},{"time":793,"word":"Göran Hägglund"},{"time":1159,"word":"Lars Magnusson"},{"time":1342,"word":"John Maynard"},{"time":1403,"word":"Kristina Boréus"},{"time":2257,"word":"Thomas Piketty"},{"time":2440,"word":"Thomas Pikettys"}];
+	var response = [{"time":4,"word":"Håkan Juholt"},
+	                {"time":9,"word":"Fredrik Reinfeldt"},
+	                {"time":18,"word":"Jan Björklund"},
+	                {"time":793,"word":"Göran Hägglund"},
+	                {"time":1159,"word":"Lars Magnusson"},
+	                {"time":1342,"word":"John Maynard"},
+	                {"time":1403,"word":"Kristina Boréus"},
+	                {"time":2257,"word":"Thomas Piketty"},
+	                {"time":2440,"word":"Thomas Pikettys"}];
+
 	module.exports = React.createClass({
 	    displayName: 'LinkList',
 	    getInitialState:function(){
@@ -136,24 +148,28 @@
 	        }
 	    },
 	    componentWillMount: function() {
-	            this.setState({
-	            data: response
-	            });
 
-	      // $.ajax({
-	      //   url: 'http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt',
-	      //   dataType: 'json',
-	      //   timeout: 3000,
-	      //   success: function(data) {
-	      //       this.setState({
-	      //       data: data
-	      //       });
-	      //  }.bind(this),
-	      //  error: function(xhr, status, err) {
-	      //    console.log("error mot api");
-	      //    this.componentWillMount();
-	      //  }.bind(this)
-	      // });
+
+
+
+	            // this.setState({
+	            // data: response
+	            // });
+
+	      $.ajax({
+	        url: 'http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt',
+	        dataType: 'json',
+	        timeout: 3000,
+	        success: function(data) {
+	            this.setState({
+	            data: data
+	            });
+	       }.bind(this),
+	       error: function(xhr, status, err) {
+	         console.log("error mot api");
+	        // this.componentWillMount();
+	       }.bind(this)
+	      });
 
 
 	    },
@@ -169,6 +185,8 @@
 	            var namearray = text.word.split(' ');
 	            var wikiurl = 'http://sv.wikipedia.org/wiki/' + namearray[0] + '_' + namearray[1];
 	            console.log(wikiurl);
+
+
 
 	               return (
 	                 React.createElement("div", {key: i}, 
@@ -193,7 +211,7 @@
 	var React = __webpack_require__(1)
 
 
-
+	var wikiurl;
 	module.exports = React.createClass({
 	    displayName: 'LinkObject',
 	    getInitialState:function(){
@@ -205,14 +223,12 @@
 	        apiresponse:null
 	      }
 	    },
-	    componentWillMount: function() {
-
-
-	      if (this.state.apiresponse = null) {
+	    componentDidMount: function() {
 	      var namearray = this.props.name.split(' ');
-	      var apiurl = 'http://sv.wikipedia.org/w/api.php?format=json&action=query&generator=search&continue=&gsrnamespace=0&gsrsearch='
+	      var apiurl =
+	      'http://sv.wikipedia.org/w/api.php?format=json&action=query&generator=search&continue=&gsrnamespace=0&gsrsearch='
 	      + namearray[0] + '_' + namearray[1]
-	      + '&gsrlimit=1&prop=pageimages%7Cextracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max';
+	      + '&gsrlimit=1&prop=pageimages%7Cextracts&exintro&explaintext&exsentences=1&prop=info&inprop=url&callback=?';
 
 	      $.ajax({
 	        url: apiurl,
@@ -222,33 +238,37 @@
 	            this.setState({
 	            apiresponse: data
 	            });
+	            console.log(data);
 	       }.bind(this),
 	       error: function(xhr, status, err) {
 	         console.log("error mot api");
-	         this.componentWillMount();
 	       }.bind(this)
 	      });
-	      }
 	    },
-	    componentDidMount: function() {
-	      console.log(this.state.apiresponse);
+	    componentDidUpdate: function(prevProps, prevState) {
+	        var preurl = this.state.apiresponse.query.pages;
+	          $.each(this.state.apiresponse.query.pages, function() {
+	           wikiurl = $(this)[0].canonicalurl;
+	      })
 	    },
 	    render: function() {
 
-	var delayTime = (this.props.starttime).toString() + "s";
+	      console.log(wikiurl, this.state.name, this.props.name);
+
+	      var delayTime = (this.props.starttime).toString() + "s";
 	      var divStyle = {
 	        WebkitAnimationDelay: delayTime
 	      };
 
-	var startdelay = parseInt(this.props.starttime) + 20;
-	var delayTimeOut = startdelay.toString() + "s";
+	      var startdelay = parseInt(this.props.starttime) + 20;
+	      var delayTimeOut = startdelay.toString() + "s";
 	            var divStyleOut = {
 	              WebkitAnimationDelay: delayTimeOut
 	            };
 
 	        return (
 	        React.createElement("div", {style: divStyleOut, className: "linkobject"}, 
-	                React.createElement("a", {href: this.props.url, style: divStyle, target: "_blank", className: " linkstyle linkelement "}, this.props.name, 
+	                React.createElement("a", {href: wikiurl, style: divStyle, target: "_blank", className: " linkstyle linkelement "}, this.state.name, 
 	                  React.createElement("span", {className: "blockelement"}, 
 	                    React.createElement("span", {className: "linksource"}, this.props.source)
 	                  )
