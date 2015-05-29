@@ -1,7 +1,9 @@
 /** @jsx React.DOM */
-'use strict'
-var React = require('react')
-var LinkObject = require('./linkobject')
+'use strict';
+
+var React = require('react');
+
+var LinkObject = require('./linkobject.jsx');
 
 var linknode;
 var response = [{"time":8,"word":"Margit Silberstein"},
