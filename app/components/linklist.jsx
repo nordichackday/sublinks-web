@@ -8,45 +8,43 @@ var LinkObject = require('./linkobject.jsx');
 
 var linknode;
 
+var fakedata = [{"time":8,"word":"Margit Silberstein"},
+            {"time":9,"word":"Anna Kinberg Batra"},
+            {"time":30,"word":"Jonas Sjöstedt"},
+            {"time":35,"word":"Fredrik Reinfeldt"},
+            {"time":64,"word":"Stefan Löfvén"}];
+
+var realData;
+request.
+    get('http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt').
+    end(function (err, res) {
+        console.log('Got it' + res.body);
+        if (res.ok) {
+            realData = res.body;
+        }
+    });
+
+
 module.exports = React.createClass({
     displayName: 'LinkList',
     getInitialState:function(){
         return {
-            data: null
+            data: []
         }
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         // TODO: Only works in client, make it work on both server and client
+        console.log('componentDidMount');
         if (this.props.demo) {
             console.log('Using demo keywords');
-            this.setState({
-                data: [{"time":8,"word":"Margit Silberstein"},
-                    {"time":9,"word":"Anna Kinberg Batra"},
-                    {"time":30,"word":"Jonas Sjöstedt"},
-                    {"time":35,"word":"Fredrik Reinfeldt"},
-                    {"time":64,"word":"Stefan Löfvén"}]
-            });
+            this.setState({data: fakedata});
         } else {
-            console.log('Reqesting keywords');
-            var self = this;
-            request.get('http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt').
-                end(function (err, res) {
-                    console.log('Got it');
-                    if (res.ok) {
-                        self.setState({
-                            data: res.body
-                        });
-                    }
-                });
+            console.log('Using real data of size ' + realData.length);
+            this.setState({data: realData});
         }
     },
     render: function() {
-        if (!this.state.data) {
-            return (
-                <div className="linklist">
-                </div>
-            );
-        }
+        console.log('Using data of size: ' + this.state.data.length);
         return (
             <div className="linklist">
                 {this.state.data.map(function(text, i){
