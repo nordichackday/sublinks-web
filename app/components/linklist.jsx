@@ -13,12 +13,6 @@ var fakedata = [{"time":8,"word":"Margit Silberstein"},
             {"time":64,"word":"Stefan Löfvén"}];
 
 // TODO: Do actual call. Will need Flux or react-async or similar
-var realData = [{"time":8,"word":"Margit Silberstein"},
-    {"time":9,"word":"Anna Kinberg Batra"},
-    {"time":30,"word":"Jonas Sjöstedt"},
-    {"time":35,"word":"Fredrik Reinfeldt"},
-    {"time":64,"word":"Stefan Löfvén"}];
-
 
 module.exports = React.createClass({
     displayName: 'LinkList',
@@ -33,8 +27,9 @@ module.exports = React.createClass({
             console.log('Using demo keywords');
             this.setState({data: fakedata});
         } else {
-            console.log('Using real data of size ' + realData.length);
-            this.setState({data: realData});
+            // TODO; This is called on client even if request param is set
+            console.log('Not really using real data');
+            this.setState({data: fakedata});
         }
     },
     render: function() {
