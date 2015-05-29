@@ -5,18 +5,19 @@
   "dependencies": {
     "ejs": "2.3.1",
     "express": "4.12.4",
-    "merge": "^1.2.0",
-    "node-jsx": "^0.13.3",
-    "react": "^0.13.3",
+    "merge": "1.2.0",
+    "node-jsx": "0.13.3",
+    "react": "0.13.3",
     "react-router": "^0.13.3",
-    "react-tools": "^0.13.3"
+    "react-tools": "0.13.3",
+    "superagent": "1.2.0"
   },
   "engines": {
     "node": "0.12.2"
   },
   "devDependencies": {
-    "jsx-loader": "^0.13.2",
-    "node-libs-browser": "^0.5.2",
-    "webpack": "^1.9.8"
+    "jsx-loader": "0.13.2",
+    "node-libs-browser": "0.5.2",
+    "webpack": "1.9.8"
   }
 }

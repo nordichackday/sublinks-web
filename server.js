@@ -13,10 +13,11 @@ app.use(express.static(__dirname+'/public'));
 app.use(function(req, res) {
     var svplayid = req.query.svtplayid;
     var videotype = req.query.videotype;
+    var demo = req.query.demo;
 
     Router.run(routes, req.path, function(Handler, state) {
         // var reactHtml = React.renderToString(React.createElement(Handler, {path: req.path}));
-        var reactHtml = React.renderToString(React.createElement(Handler, merge({svtplayid: svplayid, videotype: videotype}, state)));
+        var reactHtml = React.renderToString(React.createElement(Handler, merge({svtplayid: svplayid, videotype: videotype, demo: demo}, state)));
         res.render('index.ejs', {reactOutput: reactHtml});
     });
 });
