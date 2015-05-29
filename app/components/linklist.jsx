@@ -1,7 +1,9 @@
 /** @jsx React.DOM */
-'use strict'
-var React = require('react')
-var LinkObject = require('./linkobject')
+'use strict';
+
+var React = require('react');
+
+var LinkObject = require('./linkobject.jsx');
 
 var linknode;
 var response = [{"time":4,"word":"Håkan Juholt"},
@@ -73,4 +75,4 @@ module.exports = React.createClass({
         </div>
       );
     }
-})
+});

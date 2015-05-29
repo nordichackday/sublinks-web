@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
-'use strict'
-var React = require('react')
+'use strict';
+
+var React = require('react');
 
 
 var wikiurl;
@@ -68,4 +69,4 @@ module.exports = React.createClass({
         </div>
       );
     }
-})
+});

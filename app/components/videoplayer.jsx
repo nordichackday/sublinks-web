@@ -1,13 +1,20 @@
 /** @jsx React.DOM */
-'use strict'
-var React = require('react')
+'use strict';
 
-var videoid = decodeURIComponent(window.location.search.substring(1).split("&")[0].split("=")[1]);
+var React = require('react');
+
+var videoid;
 
 module.exports = React.createClass({
     displayName: 'VideoPlayer',
 
     render: function() {
+        if (this.props.svtplayid) {
+            videoid = this.props.svtplayid;
+        } else {
+            videoid = decodeURIComponent(window.location.search.substring(1).split("&")[0].split("=")[1]);
+        }
+
         return (
         <div>
 
@@ -25,4 +32,4 @@ module.exports = React.createClass({
 
     }
 
-})
+});
