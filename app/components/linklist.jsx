@@ -37,7 +37,6 @@ module.exports = React.createClass({
                 {this.state.data.map(function(text, i){
                     var namearray = text.word.split(' ');
                     var wikiurl = 'http://sv.wikipedia.org/wiki/' + namearray[0] + '_' + namearray[1];
-                    console.log(text, "");
                     return (
                         <div key={i}>
                             <LinkObject name={text.word} source="Wikipedia" starttime={text.time}/>

@@ -54,7 +54,6 @@ module.exports = React.createClass({
         }
    })
       }
-      console.log(wikiurl, this.state.name, this.props.name);
 
       var delayTime = (this.props.starttime).toString() + "s";
       var divStyle = {
