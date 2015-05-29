@@ -20,7 +20,7 @@ module.exports = React.createClass({
 
 
     <div dangerouslySetInnerHTML={
-      {__html: '<iframe width="100%" height="700" src="http://www.svtplay.se/video/' + videoid + '?type=embed" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'}
+      {__html: '<iframe width="100%" height="700" src="http://www.svtplay.se/klipp/' + videoid + '?type=embed" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'}
       }
        />
 
