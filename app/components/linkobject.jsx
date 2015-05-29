@@ -40,17 +40,11 @@ module.exports = React.createClass({
        }.bind(this)
       });
     },
-    componentDidUpdate: function(prevProps, prevState) {
 
-    },
     render: function() {
 
       if (this.state.apiresponse != null) {
       var preurl = this.state.apiresponse.query.pages;
-
-
-      console.log(this.state.apiresponse, this.props.name, "apiresponse");
-
 
         $.each(this.state.apiresponse.query.pages, function(name) {
           if (parseInt(name) > 0) {

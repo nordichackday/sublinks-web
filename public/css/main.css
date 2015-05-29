@@ -6,7 +6,7 @@ body {
 .header {
   text-align: left;
   color: white;
-  background-image: url('playlogo.png');
+  background-image: url('/playlogo.png');
   width: 12em;
   background-size: 21%;
   background-repeat: no-repeat;

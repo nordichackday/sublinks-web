@@ -22,7 +22,6 @@ module.exports = React.createClass({
         }
     },
     componentWillMount: function() {
-        console.log('componentDidMount');
         if (this.props.demo) {
             console.log('Using demo keywords');
             this.setState({data: fakedata});
@@ -33,7 +32,6 @@ module.exports = React.createClass({
         }
     },
     render: function() {
-        console.log('Using data of size: ' + this.state.data.length);
         return (
             <div className="linklist">
                 {this.state.data.map(function(text, i){
