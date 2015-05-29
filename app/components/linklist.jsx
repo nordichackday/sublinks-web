@@ -28,7 +28,6 @@ module.exports = React.createClass({
         }
     },
     componentWillMount: function() {
-        // TODO: Only works in client, make it work on both server and client
         console.log('componentDidMount');
         if (this.props.demo) {
             console.log('Using demo keywords');
