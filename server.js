@@ -12,10 +12,11 @@ app.use(express.static(__dirname+'/public'));
 
 app.use(function(req, res) {
     var svplayid = req.query.svtplayid;
+    var videotype = req.query.videotype;
 
     Router.run(routes, req.path, function(Handler, state) {
         // var reactHtml = React.renderToString(React.createElement(Handler, {path: req.path}));
-        var reactHtml = React.renderToString(React.createElement(Handler, merge({svtplayid: svplayid}, state)));
+        var reactHtml = React.renderToString(React.createElement(Handler, merge({svtplayid: svplayid, videotype: videotype}, state)));
         res.render('index.ejs', {reactOutput: reactHtml});
     });
 });

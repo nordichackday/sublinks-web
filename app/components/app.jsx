@@ -15,7 +15,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <div className="header">Nordic Hack Day</div>
-                <VideoPlayer svtplayid={this.props.svtplayid}/>
+                <VideoPlayer svtplayid={this.props.svtplayid} videotype={this.props.videotype}/>
                 <LinkList />
                 <ProgrammeList />
             </div>
