@@ -1,10 +1,12 @@
 /** @jsx React.DOM */
-'use strict';
-
-var React = require('react');
+'use strict'
+var React = require('react')
 
 
 var wikiurl;
+var wikiname;
+var wikiinfo;
+
 module.exports = React.createClass({
     displayName: 'LinkObject',
     getInitialState:function(){
@@ -17,10 +19,12 @@ module.exports = React.createClass({
     },
     componentDidMount: function() {
       var namearray = this.props.name.split(' ');
-      var apiurl =
-      'http://sv.wikipedia.org/w/api.php?format=json&action=query&generator=search&continue=&gsrnamespace=0&gsrsearch='
-      + namearray[0] + '_' + namearray[1]
-      + '&gsrlimit=1&prop=pageimages%7Cextracts&exintro&explaintext&exsentences=1&prop=info&inprop=url&callback=?';
+      // var apiurl =
+      // 'http://sv.wikipedia.org/w/api.php?format=json&action=query&generator=search&continue=&gsrnamespace=0&gsrsearch='
+      // + namearray[0] + '_' + namearray[1]
+      // + '&gsrlimit=1&prop=pageimages%7Cextracts&exintro&explaintext&exsentences=1&prop=info&inprop=url&callback=?';
+      //
+      var apiurl = 'http://sv.wikipedia.org/w/api.php?action=query&generator=search&continue=&gsrnamespace=0&gsrsearch=' + namearray[0] + '_' + namearray[1] + '&gsrlimit=1&prop=info|extracts&inprop=url&exintro&format=json&callback=?';
 
       $.ajax({
         url: apiurl,
@@ -51,6 +55,8 @@ module.exports = React.createClass({
         $.each(this.state.apiresponse.query.pages, function(name) {
           if (parseInt(name) > 0) {
          wikiurl = $(this)[0].canonicalurl;
+         wikiname = $(this)[0].title;
+         wikiinfo = $(this)[0].extract;
         }
    })
       }
@@ -69,7 +75,15 @@ module.exports = React.createClass({
 
         return (
         <div style={divStyleOut} className="linkobject">
-                <a href={wikiurl} style={divStyle} target="_blank" className=" linkstyle linkelement ">{this.state.name}
+
+          <div className="info" dangerouslySetInnerHTML={
+            {__html: wikiinfo}
+            }
+             />
+
+
+
+                <a href={wikiurl} style={divStyle} target="_blank" className=" linkstyle linkelement ">{wikiname}
                   <span className="blockelement">
                     <span className="linksource">{this.props.source}</span>
                   </span>

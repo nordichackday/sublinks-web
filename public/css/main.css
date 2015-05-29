@@ -6,12 +6,12 @@ body {
 .header {
   text-align: left;
   color: white;
-  background-image: url('/playlogo.png');
+  background-image: url('playlogo.png');
   width: 12em;
   background-size: 21%;
   background-repeat: no-repeat;
-  padding-left: 3.3em;
-  padding-top: 0.2em;
+  padding-left: 3.1em;
+  padding-top: 5px;
   font-size: 36px;
   margin-bottom: 0.4em;
 }
@@ -50,6 +50,31 @@ body {
 .blockelement {
   display:block;
 }
+
+
+.info {
+  width: 20em;
+position: absolute;
+background-color: rgba(255, 255, 255, 0.82);
+right: 105%;
+border-radius: 3px;
+padding: 1em;
+font-weight: normal;
+color: black;
+top: 0em;
+display:none;
+}
+
+
+
+.info > *:not(:first-child) {
+  display: none;
+}
+
+.linkobject:hover .info{
+display : block;
+}
+
 
 a {
   color:inherit;

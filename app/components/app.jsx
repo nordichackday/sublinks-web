@@ -14,6 +14,8 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div>
+              <a href="/?svtplayid=2918187&type=klipp"><div className="annotatedmode">Fördjupningsläge</div></a>
+
                 <div className="header">Nordic Hack Day</div>
                 <VideoPlayer svtplayid={this.props.svtplayid} videotype={this.props.videotype}/>
                 <LinkList demo={this.props.demo} />
