@@ -18,6 +18,7 @@ module.exports = React.createClass({
     componentDidMount: function() {
         // TODO: Only works in client, make it work on both server and client
         if (this.props.demo) {
+            console.log('Using demo keywords');
             this.setState({
                 data: [{"time":8,"word":"Margit Silberstein"},
                     {"time":9,"word":"Anna Kinberg Batra"},
@@ -26,6 +27,7 @@ module.exports = React.createClass({
                     {"time":64,"word":"Stefan Löfvén"}]
             });
         } else {
+            console.log('Reqesting keywords');
             var self = this;
             request.get('http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt').
                 end(function (err, res) {
