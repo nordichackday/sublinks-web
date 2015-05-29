@@ -1,20 +1,14 @@
 /** @jsx React.DOM */
-'use strict';
-
-var React = require('react');
-
-var LinkObject = require('./linkobject.jsx');
+'use strict'
+var React = require('react')
+var LinkObject = require('./linkobject')
 
 var linknode;
-var response = [{"time":4,"word":"Håkan Juholt"},
-                {"time":9,"word":"Fredrik Reinfeldt"},
-                {"time":18,"word":"Jan Björklund"},
-                {"time":793,"word":"Göran Hägglund"},
-                {"time":1159,"word":"Lars Magnusson"},
-                {"time":1342,"word":"John Maynard"},
-                {"time":1403,"word":"Kristina Boréus"},
-                {"time":2257,"word":"Thomas Piketty"},
-                {"time":2440,"word":"Thomas Pikettys"}];
+var response = [{"time":8,"word":"Margit Silberstein"},
+                {"time":9,"word":"Anna Kinberg Batra"},
+                {"time":30,"word":"Jonas Sjöstedt"},
+                {"time":35,"word":"Fredrik Reinfeldt"},
+                {"time":64,"word":"Stefan Löfvén"}];
 
 module.exports = React.createClass({
     displayName: 'LinkList',
@@ -24,10 +18,6 @@ module.exports = React.createClass({
         }
     },
     componentWillMount: function() {
-
-
-
-
             this.setState({
             data: response
             });
@@ -53,26 +43,20 @@ module.exports = React.createClass({
 
     },
     render: function() {
-
-
         return (
         <div className="linklist">
           {this.state.data.map(function(text, i){
             var namearray = text.word.split(' ');
             var wikiurl = 'http://sv.wikipedia.org/wiki/' + namearray[0] + '_' + namearray[1];
-            console.log(wikiurl);
-
-
-
+            console.log(text, "");
                return (
                  <div key={i}>
-                   <LinkObject name={text.word} source="Wikipedia" url={wikiurl} starttime={text.time}/>
-
+                   <LinkObject name={text.word} source="Wikipedia" starttime={text.time}/>
                     </div>
-                      )
+                )
              })
             }
         </div>
       );
     }
-});
+})

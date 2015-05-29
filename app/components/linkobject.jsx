@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
-'use strict';
-
-var React = require('react');
+'use strict'
+var React = require('react')
 
 
 var wikiurl;
@@ -9,7 +8,6 @@ module.exports = React.createClass({
     displayName: 'LinkObject',
     getInitialState:function(){
       return {
-        url: this.props.url,
         name:this.props.name,
         source: this.props.source,
         time: this.props.starttime,
@@ -31,21 +29,30 @@ module.exports = React.createClass({
             this.setState({
             apiresponse: data
             });
-            console.log(data);
-       }.bind(this),
+          }.bind(this),
        error: function(xhr, status, err) {
          console.log("error mot api");
        }.bind(this)
       });
     },
     componentDidUpdate: function(prevProps, prevState) {
-        var preurl = this.state.apiresponse.query.pages;
-          $.each(this.state.apiresponse.query.pages, function() {
-           wikiurl = $(this)[0].canonicalurl;
-      })
+
     },
     render: function() {
 
+      if (this.state.apiresponse != null) {
+      var preurl = this.state.apiresponse.query.pages;
+
+
+      console.log(this.state.apiresponse, this.props.name, "apiresponse");
+
+
+        $.each(this.state.apiresponse.query.pages, function(name) {
+          if (parseInt(name) > 0) {
+         wikiurl = $(this)[0].canonicalurl;
+        }
+   })
+      }
       console.log(wikiurl, this.state.name, this.props.name);
 
       var delayTime = (this.props.starttime).toString() + "s";
@@ -53,7 +60,7 @@ module.exports = React.createClass({
         WebkitAnimationDelay: delayTime
       };
 
-      var startdelay = parseInt(this.props.starttime) + 20;
+      var startdelay = parseInt(this.props.starttime) + 10;
       var delayTimeOut = startdelay.toString() + "s";
             var divStyleOut = {
               WebkitAnimationDelay: delayTimeOut
@@ -69,4 +76,4 @@ module.exports = React.createClass({
         </div>
       );
     }
-});
+})

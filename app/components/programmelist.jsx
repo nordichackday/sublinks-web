@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
-'use strict';
-
-var React = require('react');
+'use strict'
+var React = require('react')
 
 module.exports = React.createClass({
     displayName: 'ProgrammeList',
@@ -20,8 +19,7 @@ module.exports = React.createClass({
        }.bind(this),
        error: function(xhr, status, err) {
          console.log("error mot api");
-         //noinspection BadExpressionStatementJS
-           this.clickHandler;
+         this.clickHandler;
        }.bind(this)
       });
 
@@ -42,4 +40,4 @@ module.exports = React.createClass({
 
     }
 
-});
+})

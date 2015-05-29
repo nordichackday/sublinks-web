@@ -1,13 +1,9 @@
 /** @jsx React.DOM */
-'use strict';
-
-var React = require('react');
-var Router = require( 'react-router');
-var RouteHandler = Router.RouteHandler;
-
-var VideoPlayer = require('./videoplayer.jsx');
-var LinkList = require('./linklist.jsx');
-var ProgrammeList = require('./programmelist.jsx');
+'use strict'
+var React = require('react')
+var VideoPlayer = require('./videoplayer')
+var LinkList = require('./linklist')
+var ProgrammeList = require('./programmelist')
 
 module.exports = React.createClass({
     displayName: 'AppThing',
@@ -15,7 +11,7 @@ module.exports = React.createClass({
         return (
         <div>
             <div className="header">Nordic Hack Day</div>
-            <VideoPlayer svtplayid={this.props.svtplayid}/>
+            <VideoPlayer />
             <LinkList />
             <ProgrammeList />
         </div>
@@ -24,4 +20,4 @@ module.exports = React.createClass({
 
     }
 
-});
+})
