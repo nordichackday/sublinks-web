@@ -12,15 +12,12 @@ var fakedata = [{"time":8,"word":"Margit Silberstein"},
             {"time":35,"word":"Fredrik Reinfeldt"},
             {"time":64,"word":"Stefan Löfvén"}];
 
-var realData;
-request.
-    get('http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt').
-    end(function (err, res) {
-        console.log('Got it' + res.body);
-        if (res.ok) {
-            realData = res.body;
-        }
-    });
+// TODO: Do actual call. Will need Flux or react-async or similar
+var realData = [{"time":8,"word":"Margit Silberstein"},
+    {"time":9,"word":"Anna Kinberg Batra"},
+    {"time":30,"word":"Jonas Sjöstedt"},
+    {"time":35,"word":"Fredrik Reinfeldt"},
+    {"time":64,"word":"Stefan Löfvén"}];
 
 
 module.exports = React.createClass({
