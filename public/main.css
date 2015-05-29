@@ -1,17 +1,24 @@
 body {
-  background: #000;
+  background: #242529;
   font-family: 'Avenir', 'Helvetica Neue', sans-serif;
 }
 
 .header {
-  text-align: center;
+  text-align: left;
   color: white;
-  font-size: 38px;
+  background-image: url('playlogo.png');
+  width: 12em;
+  background-size: 21%;
+  background-repeat: no-repeat;
+  padding-left: 3.3em;
+  padding-top: 0.2em;
+  font-size: 36px;
+  margin-bottom: 0.4em;
 }
 
 .linklist {
   position: absolute;
-  top: 4em;
+  top: 6em;
   right: 0;
 }
 

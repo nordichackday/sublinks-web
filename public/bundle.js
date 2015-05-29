@@ -105,7 +105,7 @@
 
 
 	    React.createElement("div", {dangerouslySetInnerHTML: 
-	      {__html: '<iframe width="100%" height="700" src="http://www.svtplay.se/video/' + videoid + '?type=embed" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'}
+	      {__html: '<iframe width="100%" height="700" src="http://www.svtplay.se/klipp/' + videoid + '?type=embed" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'}
 	      }
 	       )
 
@@ -130,15 +130,11 @@
 	var LinkObject = __webpack_require__(5)
 
 	var linknode;
-	var response = [{"time":4,"word":"Håkan Juholt"},
-	                {"time":9,"word":"Fredrik Reinfeldt"},
-	                {"time":18,"word":"Jan Björklund"},
-	                {"time":793,"word":"Göran Hägglund"},
-	                {"time":1159,"word":"Lars Magnusson"},
-	                {"time":1342,"word":"John Maynard"},
-	                {"time":1403,"word":"Kristina Boréus"},
-	                {"time":2257,"word":"Thomas Piketty"},
-	                {"time":2440,"word":"Thomas Pikettys"}];
+	var response = [{"time":8,"word":"Margit Silberstein"},
+	                {"time":9,"word":"Anna Kinberg Batra"},
+	                {"time":30,"word":"Jonas Sjöstedt"},
+	                {"time":35,"word":"Fredrik Reinfeldt"},
+	                {"time":64,"word":"Stefan Löfvén"}];
 
 	module.exports = React.createClass({
 	    displayName: 'LinkList',
@@ -148,28 +144,24 @@
 	        }
 	    },
 	    componentWillMount: function() {
-
-
-
-
-	            // this.setState({
-	            // data: response
-	            // });
-
-	      $.ajax({
-	        url: 'http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt',
-	        dataType: 'json',
-	        timeout: 3000,
-	        success: function(data) {
 	            this.setState({
-	            data: data
+	            data: response
 	            });
-	       }.bind(this),
-	       error: function(xhr, status, err) {
-	         console.log("error mot api");
-	        // this.componentWillMount();
-	       }.bind(this)
-	      });
+
+	      // $.ajax({
+	      //   url: 'http://sublinks-filter.herokuapp.com/?sublink_url=http://media.svt.se/download/mcc/wp3/undertexter-wsrt/1368236/PG-1368236-001A-DENENDAVAGENS-01.wsrt',
+	      //   dataType: 'json',
+	      //   timeout: 3000,
+	      //   success: function(data) {
+	      //       this.setState({
+	      //       data: data
+	      //       });
+	      //  }.bind(this),
+	      //  error: function(xhr, status, err) {
+	      //    console.log("error mot api");
+	      //   // this.componentWillMount();
+	      //  }.bind(this)
+	      // });
 
 
 	    },
@@ -177,23 +169,17 @@
 
 	    },
 	    render: function() {
-
-
 	        return (
 	        React.createElement("div", {className: "linklist"}, 
 	          this.state.data.map(function(text, i){
 	            var namearray = text.word.split(' ');
 	            var wikiurl = 'http://sv.wikipedia.org/wiki/' + namearray[0] + '_' + namearray[1];
-	            console.log(wikiurl);
-
-
-
+	            console.log(text, "");
 	               return (
 	                 React.createElement("div", {key: i}, 
-	                   React.createElement(LinkObject, {name: text.word, source: "Wikipedia", url: wikiurl, starttime: text.time})
-
+	                   React.createElement(LinkObject, {name: text.word, source: "Wikipedia", starttime: text.time})
 	                    )
-	                      )
+	                )
 	             })
 	            
 	        )
@@ -216,7 +202,6 @@
 	    displayName: 'LinkObject',
 	    getInitialState:function(){
 	      return {
-	        url: this.props.url,
 	        name:this.props.name,
 	        source: this.props.source,
 	        time: this.props.starttime,
@@ -238,21 +223,30 @@
 	            this.setState({
 	            apiresponse: data
 	            });
-	            console.log(data);
-	       }.bind(this),
+	          }.bind(this),
 	       error: function(xhr, status, err) {
 	         console.log("error mot api");
 	       }.bind(this)
 	      });
 	    },
 	    componentDidUpdate: function(prevProps, prevState) {
-	        var preurl = this.state.apiresponse.query.pages;
-	          $.each(this.state.apiresponse.query.pages, function() {
-	           wikiurl = $(this)[0].canonicalurl;
-	      })
+
 	    },
 	    render: function() {
 
+	      if (this.state.apiresponse != null) {
+	      var preurl = this.state.apiresponse.query.pages;
+
+
+	      console.log(this.state.apiresponse, this.props.name, "apiresponse");
+
+
+	        $.each(this.state.apiresponse.query.pages, function(name) {
+	          if (parseInt(name) > 0) {
+	         wikiurl = $(this)[0].canonicalurl;
+	        }
+	   })
+	      }
 	      console.log(wikiurl, this.state.name, this.props.name);
 
 	      var delayTime = (this.props.starttime).toString() + "s";
@@ -260,7 +254,7 @@
 	        WebkitAnimationDelay: delayTime
 	      };
 
-	      var startdelay = parseInt(this.props.starttime) + 20;
+	      var startdelay = parseInt(this.props.starttime) + 10;
 	      var delayTimeOut = startdelay.toString() + "s";
 	            var divStyleOut = {
 	              WebkitAnimationDelay: delayTimeOut
