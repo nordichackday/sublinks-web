@@ -2529,7 +2529,7 @@
 	        }
 	    },
 	    render: function() {
-	        console.log('Using real data of ' + this.state.data);
+	        console.log('Using data of size: ' + this.state.data.length);
 	        return (
 	            React.createElement("div", {className: "linklist"}, 
 	                this.state.data.map(function(text, i){
