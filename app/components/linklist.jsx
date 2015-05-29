@@ -6,8 +6,6 @@ var request = require('superagent');
 
 var LinkObject = require('./linkobject.jsx');
 
-var linknode;
-
 var fakedata = [{"time":8,"word":"Margit Silberstein"},
             {"time":9,"word":"Anna Kinberg Batra"},
             {"time":30,"word":"Jonas Sjöstedt"},
