@@ -5,6 +5,7 @@ var React = require('react');
 
 
 var wikiurl;
+var wikiname;
 module.exports = React.createClass({
     displayName: 'LinkObject',
     getInitialState:function(){
@@ -51,6 +52,7 @@ module.exports = React.createClass({
         $.each(this.state.apiresponse.query.pages, function(name) {
           if (parseInt(name) > 0) {
          wikiurl = $(this)[0].canonicalurl;
+         wikiname = $(this)[0].title;
         }
    })
       }
@@ -69,7 +71,7 @@ module.exports = React.createClass({
 
         return (
         <div style={divStyleOut} className="linkobject">
-                <a href={wikiurl} style={divStyle} target="_blank" className=" linkstyle linkelement ">{this.state.name}
+                <a href={wikiurl} style={divStyle} target="_blank" className=" linkstyle linkelement ">{wikiname}
                   <span className="blockelement">
                     <span className="linksource">{this.props.source}</span>
                   </span>
